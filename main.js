@@ -10,22 +10,18 @@ cnv.height = 400;
 let mouseIsPressed = false;
 let mouseX, mouseY;
 
+
 // Main Program Loop (60 FPS)
 requestAnimationFrame(loop);
 
 function loop() {
-    // Update Variables
 
-
-    // Draw a background
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, cnv.width, cnv.height);
 
     // Draw a circle if mouseIsPressed
     if (mouseIsPressed) {
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.arc(mouseX, 200, 10, 0, 2 * Math.PI);
+        ctx.arc(mouseX, mouseY, 5, 0, 2 * Math.PI);
         ctx.fill();
     }
 
@@ -36,9 +32,9 @@ function loop() {
 document.addEventListener("mousedown", mousedownHandler);
 document.addEventListener("mouseup", mouseupHandler);
 document.addEventListener("mousemove", mousemoveHandler)
+document.addEventListener("keydown", keydownHandler)
 
 function mousedownHandler(event) {
-    console.log(event);
     mouseIsPressed = true;
 }
 
@@ -52,4 +48,12 @@ function mousemoveHandler(event) {
     mouseX = event.x - cnvRect.x;
     mouseY = event.y - cnvRect.y;
     // console.log(event);
+}
+
+function keydownHandler(event) {
+    if (event.code === "Space") { /// use three equals recommended means string data can only     equal string and so forth very strict 2== means string data can equal string and number data
+        // Draw a background
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, cnv.width, cnv.height);
+    }
 }
