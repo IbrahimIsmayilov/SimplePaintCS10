@@ -7,8 +7,10 @@ cnv.width = 600;
 cnv.height = 400;
 
 // Global Variables
-let mouseIsPressed = false;
+let mouseIsPressed = false
 let mouseX, mouseY;
+let size = 5;
+let 
 
 
 // Main Program Loop (60 FPS)
@@ -21,7 +23,7 @@ function loop() {
     if (mouseIsPressed) {
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 5, 0, 2 * Math.PI);
+        ctx.arc(mouseX, mouseY, size, 0, 2 * Math.PI);
         ctx.fill();
     }
 
@@ -55,5 +57,9 @@ function keydownHandler(event) {
         // Draw a background
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, cnv.width, cnv.height);
+    } else if (event.code === "ArrowUp") {
+        size++;
+    } else if (event.code === "ArrowDown") {
+        size--;
     }
 }
