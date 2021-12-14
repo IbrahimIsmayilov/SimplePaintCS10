@@ -8,23 +8,25 @@ cnv.height = 400;
 
 // Global Variables
 let mouseIsPressed = false
-let mouseX, mouseY;
+let mouseX, mouseY, pmouseX, pmouseY;
 let size = 5;
 let penColor = "black";
 
+ctx.lineCap = "round";
 
 // Main Program Loop (60 FPS)
 requestAnimationFrame(loop);
 
 function loop() {
 
-
     // Draw a circle if mouseIsPressed
     if (mouseIsPressed) {
-        ctx.fillStyle = penColor;
+        ctx.strokeStyle = penColor;
+        ctx.lineWidth  = size;
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, size, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx.moveTo(pmouseX, pmouseY);
+        ctx.lineTo(mouseX, mouseY);
+        ctx.stroke();
     }
 
     requestAnimationFrame(loop);
@@ -45,6 +47,11 @@ function mouseupHandler() {
 }
 
 function mousemoveHandler(event) {
+    // Save previous mouseX and mouseY
+    pmouseX = mouseX;
+    pmouseY = mouseY;
+
+    // Update mouseX and mouseY
     let cnvRect = cnv.getBoundingClientRect()
     mouseX = event.x - cnvRect.x;
     mouseY = event.y - cnvRect.y;
@@ -61,7 +68,7 @@ function keydownHandler(event) {
     } else if (event.code === "ArrowUp") {
         size++;
     } else if (event.code === "ArrowDown") {
-        size--; 
+        size--;
     } else if (event.code === "Digit1") {
         penColor = "red";
     } else if (event.code === "Digit2") {
@@ -74,7 +81,7 @@ function keydownHandler(event) {
 // Button Events
 document.getElementById("redBtn").addEventListener("click", setRed);
 document.getElementById("greenBtn").addEventListener("click", setGreen);
-document.getElementById("blueBtn").addEventListener("click", setBlue); 
+document.getElementById("blueBtn").addEventListener("click", setBlue);
 
 function setRed() {
     penColor = "red";
