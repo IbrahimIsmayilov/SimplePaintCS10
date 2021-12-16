@@ -1,10 +1,10 @@
-// Simple Paint
+// Simple Paint idea {add an option whether you want to draw with lines or circles or squares, adding more colors as options}
 
 // Set up canvas and graphics context
 let cnv = document.getElementById("myCanvas");
 let ctx = cnv.getContext("2d");
-cnv.width = 600;
-cnv.height = 400;
+cnv.width = 800;
+cnv.height = 600;
 
 // Global Variables
 let mouseIsPressed = false
@@ -12,7 +12,7 @@ let mouseX, mouseY, pmouseX, pmouseY;
 let size = 5;
 let penColor = "black";
 
-ctx.lineCap = "round";
+// ctx.lineCap = "round";
 
 // Main Program Loop (60 FPS)
 requestAnimationFrame(loop);
@@ -61,7 +61,7 @@ function mousemoveHandler(event) {
 function keydownHandler(event) {
     console.log(event.code)
 
-    if (event.code === "Space") { /// use three equals recommended means string data can only  equal string and so forth very strict 2== means string data can equal string and number data
+    if (event.code === "Space") { /// use three equals recommended means string data can only equal string and so forth very strict 2== means string data can equal string and number data
         // Draw a background
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, cnv.width, cnv.height);
@@ -77,11 +77,12 @@ function keydownHandler(event) {
         penColor = "blue";
     }
 }
-
-// Button Events
+ 
+// Color Events
 document.getElementById("redBtn").addEventListener("click", setRed);
 document.getElementById("greenBtn").addEventListener("click", setGreen);
 document.getElementById("blueBtn").addEventListener("click", setBlue);
+document.getElementById("colorPicker").addEventListener("change", changeColor);
 
 function setRed() {
     penColor = "red";
@@ -93,4 +94,8 @@ function setGreen() {
 
 function setBlue() {
     penColor = "blue";
+}
+
+function changeColor() {
+    penColor = document.getElementById("colorPicker").value;
 }
